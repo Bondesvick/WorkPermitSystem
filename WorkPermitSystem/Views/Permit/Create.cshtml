@@ -1,0 +1,29 @@
+﻿@model WorkPermitSystem.Models.ViewModels.CreatePermitViewModel
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-controller="Permit" asp-action="Create" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="File"></label>
+                <input asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+
+            @*<div class="form-group">
+                <input type="file" name="imageFile" value="Upload an image" />
+            </div>*@
+            <button type="submit" class="btn btn-default">Create</button>
+        </form>
+    </div>
+</div>
