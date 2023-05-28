@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WorkPermitSystem.Models.DataLayer.Repositories;
 using WorkPermitSystem.Models.DomainModels;
 using WorkPermitSystem.Services;
 using WorkPermitContext = WorkPermitSystem.Models.DataLayer.WorkPermitContext;
@@ -22,6 +23,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
 builder.Services.AddScoped<IFileUploader, S3FileUploader>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IRepository<DocumentInfo>, Repository<DocumentInfo>>();
 
 var app = builder.Build();
 

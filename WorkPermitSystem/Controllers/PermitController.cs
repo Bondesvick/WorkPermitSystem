@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WorkPermitSystem.Models.DataLayer.Repositories;
+using WorkPermitSystem.Models.DomainModels;
 using WorkPermitSystem.Models.ViewModels;
 
 namespace WorkPermitSystem.Controllers
@@ -7,8 +9,11 @@ namespace WorkPermitSystem.Controllers
     [Authorize]
     public class PermitController : Controller
     {
-        public PermitController()
+        private readonly IRepository<DocumentInfo> repository;
+
+        public PermitController(IRepository<DocumentInfo> repository)
         {
+            this.repository = repository;
         }
 
         public IActionResult Create(CreatePermitViewModel model)
@@ -19,6 +24,14 @@ namespace WorkPermitSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreatePermitViewModel model, IFormFile imageFile)
         {
+            var fileName = model.File.FileName;
+
+            await repository.Insert(new DocumentInfo
+            {
+                FileName = fileName,
+                //User = User.
+            });
+
             //if (ModelState.IsValid)
             //{
             //    var createAdvertModel = _mapper.Map<CreateAdvertModel>(model);

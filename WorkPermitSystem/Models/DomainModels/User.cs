@@ -12,6 +12,8 @@ namespace WorkPermitSystem.Models.DomainModels
         [StringLength(255)]
         public string LastName { get; set; }
 
+        public ICollection<DocumentInfo> Documents { get; set; }
+
         [NotMapped]
         public IList<string>? RoleNames { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
+using WorkPermitSystem.Services;
 
 namespace WorkPermitSystem.Areas.Aprover.Controllers
 {
@@ -8,9 +8,20 @@ namespace WorkPermitSystem.Areas.Aprover.Controllers
     [Area("Aprover")]
     public class PermitController : Controller
     {
-        public IActionResult Index()
+        private readonly IFileUploader _fileUploader;
+
+        public PermitController(IFileUploader fileUploader)
         {
-            return View();
+            _fileUploader = fileUploader;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var document = await _fileUploader.GetFileByKeyAsync("");
+
+            var file = File(document, "application/octet-stream", "");
+
+            return file;
         }
     }
 }
